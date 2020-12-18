@@ -5,11 +5,11 @@ Study the code below and explain in your own words why nested function can acces
 const external = "I'm outside the function";
 
 function myFunction() {
-  console.log(external);
+  //console.log(external);
   const internal = "Hello! I'm inside myFunction!";
 
   function nestedFunction() {
-    console.log(internal);
+    //console.log(internal);
   }
   nestedFunction();
 }
@@ -17,7 +17,7 @@ myFunction();
 
 //🚀🚀🚀 ⬇️ 📝 Explanation ⬇️ 📝 🚀🚀🚀: 
 
-
+//nestedFunction can access variable internal because due to inheritance, the child function is able to access variables from the parent function 
 
 
 
@@ -28,11 +28,14 @@ myFunction();
     
 For example, `summation(4)` should return 10 because 1+2+3+4 is 10. Note, you may use a for loop for this function if you wish */
 
-function summation(/*Your Code Here*/) {
-  /*Your Code Here*/
-
+function summation(num) {
+  let sum = 0;
+  for (let i = 0; i <= num; i++){
+    sum += i;
   }
- 
+  return sum;
+  }
+ console.log("task 2 " + summation(4));
 
 // 🦁🦁🦁 Topic 2: ADVANCED Array Methods 🦁🦁🦁
 // Given this zoo data from around the United States, follow the instructions below. Use the specific array methods in the requests below to solve the problems.
@@ -56,10 +59,14 @@ const zooAnimals = [
   displayNames will be an array of strings, and each string should follow this pattern: "name: {name}, scientific: {scientific name}"
   */
 
-  function animalNames(/*Your Code Here*/){
-    /*Your Code Here*/
+  function animalNames(arr){
+    let names = [];
+    arr.forEach(function(arr){
+      names.push(`name: ${arr.animal_name}, scientific: ${arr.scientific_name}`);
+    })
+    return names;
   }
-  
+  console.log("task 2.1" + animalNames(zooAnimals))
 
   /* 🦁🦁🦁 Request 2: .map() 🦁🦁🦁
   The zoo needs a list of all their animal's names converted to lower case. 
@@ -67,20 +74,23 @@ const zooAnimals = [
   For example: ['jackal, asiatic', .....]
   */
 
-  function lowerCaseNames(/*Your Code Here*/){
-    /*Your Code Here*/
+  function lowerCaseNames(arr){
+    const lower = arr.map(animal => animal["animal_name"].toLowerCase());
+    return lower;
   }
   
+  console.log("task 2.2 \n" + lowerCaseNames(zooAnimals));
   
   /* 🦁🦁🦁 Request 3: .filter() 🦁🦁🦁
   The zoo is concerned about animals with a lower population count. 
   Using lowPopulationAnimals use .filter() to create a new array of objects which contains only the animals with a population of less than 5.
   */
 
-  function lowPopulationAnimals(/*Your Code Here*/){
-    /*Your Code Here*/
+  function lowPopulationAnimals(arr){
+    const lowPop = arr.filter(pop => pop.population < 5);
+    return lowPop;
   }
-  
+  console.log("task 2.3 \n" + lowPopulationAnimals(zooAnimals));
 
   /* 🦁🦁🦁 Request 4: .reduce() 🦁🦁🦁
   The zoo needs to know their total animal population across the United States. 
@@ -88,10 +98,13 @@ const zooAnimals = [
   Remember the reduce method takes two arguments: a callback (which itself takes two args - the accumulator and the item), and an initial value for the count.
   */
 
-  function USApop(/*Your Code Here*/){
-    /*Your Code Here*/
+  function USApop(arr){
+    let totalPop = arr.reduce(function(popCount,animal){
+      return popCount + animal.population;
+    },0)
+    return totalPop;
   }
-  
+  console.log("task 2.4 \n" + USApop(zooAnimals));
   
   // 🦁🦁🦁 Callbacks 🦁🦁🦁  
   /* 🦁🦁🦁 Step 1: Create a higher-order function 🦁🦁🦁
